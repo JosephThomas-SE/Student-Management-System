@@ -1,0 +1,39 @@
+﻿@model StudentApp.Models.User
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login</h1>
+
+<form asp-action="Login" method="post">
+    <div class="form-group">
+        <label asp-for="UserName"></label>
+        <input asp-for="UserName" class="form-control" autocomplete="off  />
+        <span asp-validation-for="UserName" class="text-danger"></span>
+    </div>
+    <br />
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control" autocomplete="off  />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <br />
+    <br />
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Login</button>
+    </div>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"] as string))
+    {
+        <div class="alert alert-danger" role="alert">
+            @Html.Raw(ViewData["ErrorMessage"] as string)
+        </div>
+    }
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
